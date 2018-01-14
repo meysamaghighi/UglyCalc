@@ -5,22 +5,22 @@ A simple calculator with lazy evaluation.
 ### Install
 Compile: (Windows)
 ```
-g++ -std=gnu++11 calc.cpp -o calc.exe
+g++ -std=gnu++11 uglycalc.cpp -o uglycalc.exe
 ```
 
 
 ### Run
 Run: (Windows)
 ```
-calc.exe
+uglycalc.exe
 ```
 to read from the standard input, or
 ```
-calc.exe < [filename]
+uglycalc.exe < [filepath]
 ```
 if the input is in a file, or
 ```
-calc.exe [filename]
+uglycalc.exe [filepath]
 ```
 to read from a file.
 

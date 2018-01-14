@@ -7,6 +7,9 @@ Author:
 Description:
     Simple calculator that add, subtract and multiply that support lazy evaluation.
 
+Source:
+    https://github.com/meysamaghighi/UglyCalc
+
 Compile: (Windows)
     g++ -std=gnu++11 calc.cpp -o calc.exe
 
