@@ -7,17 +7,13 @@ Meysam Aghighi
 Description:
 Simple calculator with lazy evaluation.
 
-Compile:
-g++ -std=gnu++11 calc.cpp -o calc
+Compile: (Windows)
+g++ -std=gnu++11 calc.cpp -o calc.exe
 
-Run: (windows)
+Run: (Windows)
 calc.exe
-
-
-ToDo List:
-- make sure to run on windows and complete makefile.
-- read this:
-https://www.robertkehoe.com/2013/02/10-tips-for-completing-interview-coding-assignments-exercises/
+calc.exe < [filename]
+calc.exe [filename]
 
 */
 

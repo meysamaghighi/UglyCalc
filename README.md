@@ -1,8 +1,28 @@
 # UglyCalc
 A simple calculator with lazy evaluation.
 
-## Installation
+## Setting up
+### Install
+Compile: (Windows)
+```
+g++ -std=gnu++11 calc.cpp -o calc.exe
+```
 
+
+### Run
+Run: (Windows)
+```
+calc.exe
+```
+to read from the standard input, or
+```
+calc.exe < [filename]
+```
+if the input is in a file, or
+```
+calc.exe [filename]
+```
+to read from a file.
 
 ## Assumptions & Limitations
 * If there are cycles in the dependecy graph of the input variables, then there can be contradictions. For example:
