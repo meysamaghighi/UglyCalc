@@ -1,5 +1,5 @@
 # UglyCalc
-A simple calculator with lazy evaluation.
+Simple calculator with add, subtract and multiply that supports lazy evaluation.
 
 ## Setting up
 ### Install

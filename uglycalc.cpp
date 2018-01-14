@@ -5,7 +5,7 @@ Author:
     2018-01-13
 
 Description:
-    Simple calculator that add, subtract and multiply that support lazy evaluation.
+    Simple calculator with add, subtract and multiply that supports lazy evaluation.
 
 Source:
     https://github.com/meysamaghighi/UglyCalc
