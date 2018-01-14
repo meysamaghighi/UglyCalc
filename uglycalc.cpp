@@ -90,15 +90,15 @@ long long evaluate(const string& reg, const vector<operation>& data, map<string,
     dependent_registers.insert(reg); // add to the set of dependent registers
 
     long long result = 0;
-    for (int i = 0; i < data.size(); i++) {
-        if (data[i].register1 != reg)
+    for (auto& cmd : data) {
+        if (cmd.register1 != reg)
             continue;
-        if (data[i].operand == "add")
-            result += evaluate(data[i].register2, data, map_values, dependent_registers);
-        if (data[i].operand == "subtract")
-            result -= evaluate(data[i].register2, data, map_values, dependent_registers);
-        if (data[i].operand == "multiply")
-            result *= evaluate(data[i].register2, data, map_values, dependent_registers);
+        if (cmd.operand == "add")
+            result += evaluate(cmd.register2, data, map_values, dependent_registers);
+        if (cmd.operand == "subtract")
+            result -= evaluate(cmd.register2, data, map_values, dependent_registers);
+        if (cmd.operand == "multiply")
+            result *= evaluate(cmd.register2, data, map_values, dependent_registers);
     }
 
     return map_values[reg] = result;
