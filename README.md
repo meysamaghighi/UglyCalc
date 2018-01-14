@@ -44,6 +44,6 @@ print x
 ```
 can return 20 or 30 or 40. So, my calculator does not allow full numeric register names.
 
-* My calculator only supports 32-bit integers and returns an error message if an input number is out of range of a 32-bit integer (more specifically c++ int). It also assumes that all the evaluations whenever `print` is called are within a 64-bit integer (`long long` range).
+* My calculator supports integer numbers that fit in `c++ int` data type, which usually corresponds to a 32-bit integers and returns an error message if an input number is out of the range of `int`. It also assumes that all the evaluations whenever `print` is called stay within the `long long` range, otherwise the printed value will be wrong.
 
 * I use `map<string, int> map_values` for memoization, i.e. to avoid computing the value of a register more than once during evaluation. 
