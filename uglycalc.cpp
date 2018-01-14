@@ -46,7 +46,9 @@ inline bool isalnum_string(const string& s)
 
 inline bool isint(const string& s)
 { // checks whether a string is an integer or not.
-    for (auto& c : s)
+    if (s[0] != '-' && !isdigit(s[0]))
+        return false; // to allow negative numbers
+    for (auto& c : s.substr(1, s.size() - 1))
         if (!isdigit(c))
             return false;
     return true;
@@ -131,15 +133,19 @@ bool valid_command(const vector<string>& input_vector)
             cerr << "Invalid command!" << endl;
             return false;
         }
-        if (!isalnum_string(reg1) || !isalnum_string(reg2)) {
+        if (!isalnum_string(reg1)) { // check if reg1 is alphanumeric
             cerr << "Invalid variable name!" << endl;
             return false;
         }
-        if (isint(reg1)) { // check if register name is not a number
+        if (isint(reg1)) { // check if reg1 is not a number
             cerr << "All numeric register name is not allowed!" << endl;
             return false;
         }
-        if (isint(reg2) && !inrange(reg2)) { // if the second operand is a number, check if it is in the int range
+        if (!isalnum_string(reg2) && !isint(reg2)) { // check if reg2 is a valid variable or number
+            cerr << "Please enter a valid variable or integer." << endl;
+            return false;
+        }
+        if (isint(reg2) && !inrange(reg2)) { // check in case reg2 is a number, it must be in range
             cerr << reg2 << " is out of the int range!" << endl;
             return false;
         }
