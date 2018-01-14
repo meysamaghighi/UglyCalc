@@ -49,10 +49,12 @@ inline bool isint(const string& s)
     return true;
 }
 
-inline bool inrange(const string& s){ // checks whether a string that is a number is in range of int
+inline bool inrange(const string& s)
+{ // checks whether a string that is a number is in range of int
     try {
         int a = stoi(s);
-    } catch (const out_of_range& oor) {
+    }
+    catch (const out_of_range& oor) {
         return false;
     }
     return true;
@@ -114,7 +116,7 @@ bool valid_command(const vector<string>& input_vector)
             cerr << "Invalid variable name!" << endl;
             return false;
         }
-        if (isint(input_vector[1])){ // check if register name is not a number
+        if (isint(input_vector[1])) { // check if register name is not a number
             cerr << "All numeric register name is not allowed!" << endl;
             return false;
         }
@@ -130,11 +132,11 @@ bool valid_command(const vector<string>& input_vector)
             cerr << "Invalid variable name!" << endl;
             return false;
         }
-        if (isint(reg1)){ // check if register name is not a number
+        if (isint(reg1)) { // check if register name is not a number
             cerr << "All numeric register name is not allowed!" << endl;
             return false;
         }
-        if (isint(reg2) && !inrange(reg2)){ // if the second operand is a number, check if it is in the int range
+        if (isint(reg2) && !inrange(reg2)) { // if the second operand is a number, check if it is in the int range
             cerr << reg2 << " is out of the int range!" << endl;
             return false;
         }
