@@ -1,0 +1,15 @@
+a add 1000
+a multiply 1000
+b add 2000
+a multiply b
+print a
+b multiply 1000
+print a
+quit?
+quit!!!
+end!!!
+dude!?
+
+
+
+QUIT

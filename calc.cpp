@@ -1,19 +1,19 @@
 /*
 
 Author:
-Meysam Aghighi
-2018-01-13
+    Meysam Aghighi
+    2018-01-13
 
 Description:
-Simple calculator with lazy evaluation.
+    Simple calculator that add, subtract and multiply that support lazy evaluation.
 
 Compile: (Windows)
-g++ -std=gnu++11 calc.cpp -o calc.exe
+    g++ -std=gnu++11 calc.cpp -o calc.exe
 
 Run: (Windows)
-calc.exe
-calc.exe < [filename]
-calc.exe [filename]
+    calc.exe
+    calc.exe < [filename]
+    calc.exe [filename]
 
 */
 
@@ -49,6 +49,15 @@ inline bool isint(const string& s)
     return true;
 }
 
+inline bool inrange(const string& s){ // checks whether a string that is a number is in range of int
+    try {
+        int a = stoi(s);
+    } catch (const out_of_range& oor) {
+        return false;
+    }
+    return true;
+}
+
 vector<string> tokenize(string s)
 { // tokenize a string into a vector of strings: "A add 2" --> {"A", "add", "2"}
     stringstream temp_stringstream(s);
@@ -60,20 +69,20 @@ vector<string> tokenize(string s)
     return input_vector;
 }
 
-int evaluate(const string& reg, const vector<operation>& data, map<string, int>& map_values, set<string>& dependent_registers)
+long long evaluate(const string& reg, const vector<operation>& data, map<string, long long>& map_values, set<string>& dependent_registers)
 { // the main function that does the lazy evaluation recursively
-    if (isint(reg))
+    if (isint(reg)) // if the register is number return its value
         return stoi(reg); // throws exception for out_of_range inputs!
-    if (map_values.count(reg))
+    if (map_values.count(reg)) // if the register's value is already evaluated, return it
         return map_values[reg];
 
-    if (dependent_registers.count(reg)) {
+    if (dependent_registers.count(reg)) { // check for cycles in the dependency graph of registers
         cerr << "There is a cycle in the dependency graph: " << reg << " depends on itself!" << endl;
         exit(1);
     }
-    dependent_registers.insert(reg);
+    dependent_registers.insert(reg); // add to the set of dependent registers
 
-    int result = 0;
+    long long result = 0;
     for (int i = 0; i < data.size(); i++) {
         if (data[i].register1 != reg)
             continue;
@@ -101,20 +110,32 @@ bool valid_command(const vector<string>& input_vector)
             cerr << "Invalid command!" << endl;
             return false;
         }
-        if (!isalnum_string(input_vector[1])) {
+        if (!isalnum_string(input_vector[1])) { // check if register name is alphanumeric
             cerr << "Invalid variable name!" << endl;
+            return false;
+        }
+        if (isint(input_vector[1])){ // check if register name is not a number
+            cerr << "All numeric register name is not allowed!" << endl;
             return false;
         }
         return true;
     }
-    if (input_vector.size() == 3) { // three argument command should only be a binary operation
+    if (input_vector.size() == 3) { // three argument command should only be a binary operation: reg1 oper reg2
         string reg1 = input_vector[0], oper = input_vector[1], reg2 = input_vector[2];
+        if (oper != "add" && oper != "subtract" && oper != "multiply") {
+            cerr << "Invalid command!" << endl;
+            return false;
+        }
         if (!isalnum_string(reg1) || !isalnum_string(reg2)) {
             cerr << "Invalid variable name!" << endl;
             return false;
         }
-        if (oper != "add" && oper != "subtract" && oper != "multiply") {
-            cerr << "Invalid command!" << endl;
+        if (isint(reg1)){ // check if register name is not a number
+            cerr << "All numeric register name is not allowed!" << endl;
+            return false;
+        }
+        if (isint(reg2) && !inrange(reg2)){ // if the second operand is a number, check if it is in the int range
+            cerr << reg2 << " is out of the int range!" << endl;
             return false;
         }
         return true;
@@ -130,7 +151,7 @@ int main(int argc, char* argv[])
     istream* input_stream;
     ifstream input_file;
 
-    if (argc == 1) {
+    if (argc == 1) { // handling input arguments
         input_stream = &cin;
     }
     else if (argc == 2) {
@@ -150,7 +171,7 @@ int main(int argc, char* argv[])
     string input_line;
     vector<operation> data; // stores all the binary operations (e.g. a add b)
     set<string> registers; // stores all register names
-    map<string, int> map_values; // stores the values of some registers (the ones whose values are needed at print)
+    map<string, long long> map_values; // stores the values of some registers (the ones whose values are needed at print)
     set<string> dependent_registers; // stores dependent registers (to the register being printed)
 
     while (getline(*input_stream, input_line)) { // read input line by line (from file or stdin)
