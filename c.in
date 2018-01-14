@@ -1,0 +1,8 @@
+a add 10
+b add gg
+gg add 2
+gg multiply 1000
+b subtract a
+print gg
+print b
+c subtract 20
