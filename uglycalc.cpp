@@ -15,8 +15,8 @@ Compile: (Windows)
 
 Run: (Windows)
     calc.exe
-    calc.exe < [filename]
-    calc.exe [filename]
+    calc.exe < [filepath]
+    calc.exe [filepath]
 
 */
 
