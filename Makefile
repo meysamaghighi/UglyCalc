@@ -1,8 +1,14 @@
-all: calc.cpp
-	g++ -std=gnu++11 calc.cpp -o calc.out
+SRC=uglycalc.cpp
+OBJ=uglycalc.o
 
-test:
-	./calc.out input/a.in
-	./calc.out input/b.in
-	./calc.out input/c.in
-	./calc.out input/d.in
+TST=test1 test2 test3 test4
+
+$(OBJ): $(SRC)
+	g++ -std=gnu++11 $(SRC) -o $(OBJ)
+
+test: $(TST)
+
+.PHONY: $(TST)
+
+$(TST): test%:
+	./$(OBJ) < input/$*.in

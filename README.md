@@ -7,7 +7,7 @@ Compile: (Windows)
 ```
 g++ -std=gnu++11 uglycalc.cpp -o uglycalc.exe
 ```
-
+On linux you can use the makefile: `make`.
 
 ### Run
 Run: (Windows)
@@ -23,6 +23,8 @@ if the input is in a file, or
 uglycalc.exe [filepath]
 ```
 to read from a file.
+
+On linux you can use `make test` and put the test files in the `input` folder.
 
 ## Assumptions & Limitations
 * If there are cycles in the dependecy graph of the input variables, then there can be contradictions. For example:
